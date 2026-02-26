@@ -36,13 +36,13 @@ public class ProductController {
     }
 
     @GetMapping("/{productNumber}")
-    public Product getProduct(@PathVariable String productNumber) {
+    public Product getProduct(@PathVariable("productNumber") String productNumber) {
         return productService.getProduct(productNumber);
     }
 
     @PutMapping("/{productNumber}/price")
     public Product updateProductPrice(
-            @PathVariable String productNumber,
+            @PathVariable("productNumber") String productNumber,
             @Valid @RequestBody UpdatePriceRequest request) {
         return productService.updateProductPrice(productNumber, request.getPrice());
     }
