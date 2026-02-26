@@ -1,6 +1,6 @@
 # Lab4 Product Shopping - Part 2
 
-This is a new project, separated from `springmongodemo`, with 3 modules:
+This is a multi-module project:
 
 - `product-service` (port `8081`)
 - `shopping-service` (port `8082`)
