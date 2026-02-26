@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90dc1f2b-ba1a-46fa-90d8-a3d88b460fad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SA - 2025 block data/W1D5/lab 5 code/.idea/lab 5 code.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SA - 2025 block data/W1D6/Lab6 - part 1 &amp; 2/.idea/Lab6.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/.idea/Lab6 - part 3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CS590.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS590.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.Application.executor": "Run",
     "git-widget-placeholder": "feat/springmongo-students",
     "kotlin-language-version-configured": "true",
@@ -81,7 +86,7 @@
       <workItem from="1771829586537" duration="986000" />
       <workItem from="1771953388815" duration="4827000" />
       <workItem from="1772010607232" duration="26000" />
-      <workItem from="1772036149421" duration="4136000" />
+      <workItem from="1772036149421" duration="7438000" />
     </task>
     <servers />
   </component>
