@@ -25,6 +25,8 @@ This starts:
 - `product-mongo` on `localhost:27017` (db `productdb`)
 - `shopping-mongo` on `localhost:27018` (db `shoppingdb`)
 
+Mongo and service URLs are hardcoded in each module `application.yml`.
+
 ## Run the services
 
 Terminal 1:
