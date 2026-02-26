@@ -1,0 +1,8 @@
+com\cs590\lab4\client\dto\AddToCartRequest.class
+com\cs590\lab4\client\dto\ProductDto.class
+com\cs590\lab4\client\RestClientApplication.class
+com\cs590\lab4\client\Lab4ScenarioRunner.class
+com\cs590\lab4\client\config\RestClientConfig.class
+com\cs590\lab4\client\dto\CartItemDto.class
+com\cs590\lab4\client\dto\UpdatePriceRequest.class
+com\cs590\lab4\client\dto\ShoppingCartDto.class
