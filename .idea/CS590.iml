@@ -2,7 +2,44 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D3/Lesson3SpringMongoDemo/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D3/Lesson3SpringMongoDemo/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D3/Lesson3SpringMongoDemo/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D4/Application/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/EnterpriseServiceBus/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/EnterpriseServiceBus/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/InternationalShippingService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/MasterCardPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/OrderService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/OrderService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/PayPalPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/ShippingService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/ShippingService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/VisaPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/WarehouseService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D5/lab 5 code/WarehouseService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 1 &amp; 2/productservice/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 1 &amp; 2/stockservice/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/InternationalShippingService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/Lab6EnterpriseServiceBusSolution/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/Lab6EnterpriseServiceBusSolution/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/MasterCardPaymentService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/MasterCardPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/MonitorService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/MonitorService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/NextDayShippingService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/NextDayShippingService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/OrderService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/OrderService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/PayPalPaymentService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/PayPalPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/ShippingService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/ShippingService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/VisaCardPaymentService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/VisaCardPaymentService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/SA - 2025 block data/W1D6/Lab6 - part 3/WarehouseService/.idea" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
