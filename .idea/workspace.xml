@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90dc1f2b-ba1a-46fa-90d8-a3d88b460fad" name="Changes" comment="labs updated" />
+    <list default="true" id="90dc1f2b-ba1a-46fa-90d8-a3d88b460fad" name="Changes" comment="labs updated">
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-product-shopping/product-service/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-product-shopping/rest-client/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-product-shopping/shopping-service/target/classes/application.yml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +58,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.30921987",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

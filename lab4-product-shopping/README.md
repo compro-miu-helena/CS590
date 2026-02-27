@@ -6,6 +6,18 @@ This is a multi-module project:
 - `shopping-service` (port `8082`)
 - `rest-client` (executes steps 1-6 from the lab instructions)
 
+## Architecture Diagram
+
+![Product Shopping Architecture](../docs/diagrams/Archtecture-ProductShopping.jpg)
+
+The diagram represents the implemented runtime architecture:
+
+- `rest-client` calls `product-service` to add/get/update products.
+- `rest-client` calls `shopping-service` to add/get shopping cart data.
+- `product-service` persists products in MongoDB `productdb` (`localhost:27017`).
+- `shopping-service` persists cart data in MongoDB `shoppingdb` (`localhost:27018`).
+- `shopping-service` calls `product-service` (`GET /products/{productNumber}`) to load and refresh product details, including price updates reflected in the cart.
+
 ## Requirements
 
 - Java 17
