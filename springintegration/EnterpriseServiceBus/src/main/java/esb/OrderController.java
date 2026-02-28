@@ -17,8 +17,12 @@ public class OrderController {
     @Qualifier("warehousechannel")
     MessageChannel warehouseChannel;
 
+    @Autowired
+    MonitoringClient monitoringClient;
+
     @PostMapping("/orders")
     public ResponseEntity<?> receiveOrder(@RequestBody Order order) {
+        monitoringClient.logStep("ESB", order.getOrderNumber(), "Order received by ESB: " + order);
         Message<Order> orderMessage = MessageBuilder.withPayload(order).build();
         warehouseChannel.send(orderMessage);
         return new ResponseEntity<Order>(order, HttpStatus.OK);

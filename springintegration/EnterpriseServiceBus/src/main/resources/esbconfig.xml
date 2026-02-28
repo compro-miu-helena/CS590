@@ -1,26 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-			http://www.springframework.org/schema/beans/spring-beans.xsd
-			http://www.springframework.org/schema/integration
-			http://www.springframework.org/schema/integration/spring-integration.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<channel id="warehousechannel"/>
-	<channel id="shippingchannel"/>
+    <channel id="warehousechannel"/>
+    <channel id="orderTypeRouterChannel"/>
+    <channel id="domesticAmountRouterChannel"/>
 
-	<service-activator input-channel="warehousechannel"
-	                   output-channel="shippingchannel"
-	                   ref="warehouseservice"
-	                   method="checkStock"/>
-	                   
-	<service-activator input-channel="shippingchannel"
-	                   ref="shippingservice"
-	                   method="ship"/>
-	                   
-	<beans:bean id="warehouseservice" class="esb.WarehouseActivator"/>
-	<beans:bean id="shippingservice" class="esb.ShippingActivator"/>
+    <channel id="internationalShippingChannel"/>
+    <channel id="nextDayShippingChannel"/>
+    <channel id="normalShippingChannel"/>
 
-	
+    <channel id="paymentRouterChannel"/>
+    <channel id="mastercardPaymentChannel"/>
+    <channel id="visaPaymentChannel"/>
+    <channel id="paypalPaymentChannel"/>
+
+    <service-activator input-channel="warehousechannel"
+                       output-channel="orderTypeRouterChannel"
+                       ref="warehouseservice"
+                       method="checkStock"/>
+
+    <router input-channel="orderTypeRouterChannel"
+            expression="payload.orderType">
+        <mapping value="international" channel="internationalShippingChannel"/>
+        <mapping value="domestic" channel="domesticAmountRouterChannel"/>
+    </router>
+
+    <router input-channel="domesticAmountRouterChannel"
+            expression="payload.amount &gt; 175 ? 'nextDay' : 'normal'">
+        <mapping value="nextDay" channel="nextDayShippingChannel"/>
+        <mapping value="normal" channel="normalShippingChannel"/>
+    </router>
+
+    <service-activator input-channel="internationalShippingChannel"
+                       output-channel="paymentRouterChannel"
+                       ref="internationalshippingservice"
+                       method="ship"/>
+
+    <service-activator input-channel="nextDayShippingChannel"
+                       output-channel="paymentRouterChannel"
+                       ref="nextdayshippingservice"
+                       method="ship"/>
+
+    <service-activator input-channel="normalShippingChannel"
+                       output-channel="paymentRouterChannel"
+                       ref="normalshippingservice"
+                       method="ship"/>
+
+    <router input-channel="paymentRouterChannel"
+            expression="payload.paymentMethod">
+        <mapping value="mastercard" channel="mastercardPaymentChannel"/>
+        <mapping value="visa" channel="visaPaymentChannel"/>
+        <mapping value="paypal" channel="paypalPaymentChannel"/>
+    </router>
+
+    <service-activator input-channel="mastercardPaymentChannel"
+                       ref="mastercardpaymentservice"
+                       method="pay"/>
+
+    <service-activator input-channel="visaPaymentChannel"
+                       ref="visapaymentservice"
+                       method="pay"/>
+
+    <service-activator input-channel="paypalPaymentChannel"
+                       ref="paypalpaymentservice"
+                       method="pay"/>
+
+    <beans:bean id="warehouseservice" class="esb.WarehouseActivator"/>
+    <beans:bean id="internationalshippingservice" class="esb.InternationalShippingActivator"/>
+    <beans:bean id="nextdayshippingservice" class="esb.NextDayShippingActivator"/>
+    <beans:bean id="normalshippingservice" class="esb.NormalShippingActivator"/>
+    <beans:bean id="mastercardpaymentservice" class="esb.MastercardPaymentActivator"/>
+    <beans:bean id="visapaymentservice" class="esb.VisaPaymentActivator"/>
+    <beans:bean id="paypalpaymentservice" class="esb.PaypalPaymentActivator"/>
+
 </beans:beans>
