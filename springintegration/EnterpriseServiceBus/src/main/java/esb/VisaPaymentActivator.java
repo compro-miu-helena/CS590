@@ -14,6 +14,6 @@ public class VisaPaymentActivator {
         String message = "Routing payment to VISA for order " + order.getOrderNumber();
         System.out.println(message);
         monitoringClient.logStep("ESB", order.getOrderNumber(), message);
-        restTemplate.postForLocation("http://localhost:8085/payments/visa", order);
+        restTemplate.postForLocation("http://localhost:8086/payments", order);
     }
 }

@@ -14,6 +14,6 @@ public class PaypalPaymentActivator {
         String message = "Routing payment to PAYPAL for order " + order.getOrderNumber();
         System.out.println(message);
         monitoringClient.logStep("ESB", order.getOrderNumber(), message);
-        restTemplate.postForLocation("http://localhost:8085/payments/paypal", order);
+        restTemplate.postForLocation("http://localhost:8087/payments", order);
     }
 }

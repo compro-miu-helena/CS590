@@ -6,6 +6,19 @@ This lab implements an ESB-based integration workflow using Spring Boot and Spri
 
 The final solution includes:
 
+Project services:
+
+- `EnterpriseServiceBus` (port `8080`)
+- `WarehouseService` (port `8081`)
+- `NextDayShippingService` (port `8082`)
+- `NormalShippingService` (port `8083`)
+- `InternationalShippingService` (port `8084`)
+- `MastercardPaymentService` (port `8085`)
+- `VisaPaymentService` (port `8086`)
+- `PayPalPaymentService` (port `8087`)
+- `MonitoringService` (port `8088`)
+- `OrderService` (producer)
+
 - 3 shipping paths:
   - Next-day shipping for domestic orders with amount `> 175`
   - Normal shipping for domestic orders with amount `< 175`
@@ -44,7 +57,7 @@ flowchart TD
     NSC --> NSA[NormalShippingActivator]
 
     ISA -->|POST /orders| IS[InternationalShippingService:8084]
-    NDA -->|POST /orders| NDS[ShippingService (Next-day):8082]
+    NDA -->|POST /orders| NDS[NextDayShippingService:8082]
     NSA -->|POST /orders| NS[NormalShippingService:8083]
 
     ISA --> PR[paymentRouterChannel]
@@ -56,16 +69,18 @@ flowchart TD
     PM -->|visa| VP[VisaPaymentActivator]
     PM -->|paypal| PP[PaypalPaymentActivator]
 
-    MCP -->|POST /payments/mastercard| PAY[PaymentService:8085]
-    VP -->|POST /payments/visa| PAY
-    PP -->|POST /payments/paypal| PAY
+    MCP -->|POST /payments| MCPS[MastercardPaymentService:8085]
+    VP -->|POST /payments| VPS[VisaPaymentService:8086]
+    PP -->|POST /payments| PPS[PayPalPaymentService:8087]
 
     ESB -->|POST /events| MON[MonitoringService:8088]
     WH -->|POST /events| MON
     NDS -->|POST /events| MON
     NS -->|POST /events| MON
     IS -->|POST /events| MON
-    PAY -->|POST /events| MON
+    MCPS -->|POST /events| MON
+    VPS -->|POST /events| MON
+    PPS -->|POST /events| MON
 ```
 
 ### Routing logic (decision-only view)
@@ -122,7 +137,7 @@ OrderService -> POST /orders -> ESB (8080)
                                     |                    |                    |
                                     v                    v                    v
                               /payments/mastercard   /payments/visa     /payments/paypal
-                                     (PaymentService, 8085)
+                                     (MastercardPaymentService 8085 / VisaPaymentService 8086 / PayPalPaymentService 8087)
 
 All services -> POST /events -> MonitoringService (8088)
 ```
@@ -176,7 +191,7 @@ cd ..\WarehouseService
 .\mvnw.cmd spring-boot:run
 
 # 3) Next-day shipping
-cd ..\ShippingService
+cd ..\NextDayShippingService
 .\mvnw.cmd spring-boot:run
 
 # 4) Normal shipping
@@ -188,14 +203,22 @@ cd ..\InternationalShippingService
 .\mvnw.cmd spring-boot:run
 
 # 6) Payment
-cd ..\PaymentService
+cd ..\MastercardPaymentService
 .\mvnw.cmd spring-boot:run
 
-# 7) ESB
+# 7) Visa payment
+cd ..\VisaPaymentService
+.\mvnw.cmd spring-boot:run
+
+# 8) PayPal payment
+cd ..\PayPalPaymentService
+.\mvnw.cmd spring-boot:run
+
+# 9) ESB
 cd ..\EnterpriseServiceBus
 .\mvnw.cmd spring-boot:run
 
-# 8) Order producer (sends sample orders and exits)
+# 10) Order producer (sends sample orders and exits)
 cd ..\OrderService
 .\mvnw.cmd spring-boot:run
 ```
@@ -245,9 +268,9 @@ Example centralized monitor lines:
 [MONITOR] source=ESB order=D200 step=Order received by ESB: Order{...}
 [MONITOR] source=ESB order=D200 step=Warehouse step for order D200
 [MONITOR] source=ESB order=D200 step=Routing to NEXT-DAY shipping for order D200
-[MONITOR] source=ShippingService order=D200 step=Next-Day Shipping Service receiving order: Order{...}
+[MONITOR] source=NextDayShippingService order=D200 step=Next-Day Shipping Service receiving order: Order{...}
 [MONITOR] source=ESB order=D200 step=Routing payment to VISA for order D200
-[MONITOR] source=PaymentService order=D200 step=Visa Payment Service paid order: Order{...}
+[MONITOR] source=VisaPaymentService order=D200 step=Visa Payment Service paid order: Order{...}
 ```
 
 This gives end-to-end visibility of the whole order processing process in one console.

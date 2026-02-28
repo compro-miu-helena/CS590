@@ -14,6 +14,6 @@ public class MastercardPaymentActivator {
         String message = "Routing payment to MASTERCARD for order " + order.getOrderNumber();
         System.out.println(message);
         monitoringClient.logStep("ESB", order.getOrderNumber(), message);
-        restTemplate.postForLocation("http://localhost:8085/payments/mastercard", order);
+        restTemplate.postForLocation("http://localhost:8085/payments", order);
     }
 }
