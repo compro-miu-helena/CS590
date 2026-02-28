@@ -1,0 +1,37 @@
+﻿package lab.part3.shopping.dto;
+
+import java.util.ArrayList;
+
+public class ShoppingCartDTO {
+    private String cartid;
+    private double totalPrice;
+    private ArrayList<CartLineDTO> cartlineList = new ArrayList<>();
+
+    public String getCartid() {
+        return cartid;
+    }
+
+    public void setCartid(String cartid) {
+        this.cartid = cartid;
+    }
+
+    public ArrayList<CartLineDTO> getCartlineList() {
+        return cartlineList;
+    }
+
+    public void setCartlineList(ArrayList<CartLineDTO> cartlineList) {
+        this.cartlineList = cartlineList;
+    }
+
+    public void addCartLine(CartLineDTO cartLine) {
+        cartlineList.add(cartLine);
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+}
