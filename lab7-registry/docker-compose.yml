@@ -29,6 +29,24 @@ services:
     networks:
       - consul-net
 
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - consul-server-1
+      - consul-server-2
+      - consul-server-3
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul-server-1
+      SPRING_CLOUD_CONSUL_PORT: 8500
+      SPRING_CLOUD_CONSUL_DISCOVERY_HEALTH_CHECK_URL: http://api-gateway:8080/actuator/health
+    ports:
+      - "8080:8080"
+    networks:
+      - consul-net
+
 networks:
   consul-net:
     driver: bridge
