@@ -1,0 +1,6 @@
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\contracts\add_two_numbers.groovy
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\contracts\validate_should_return_even.groovy
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\contracts\validate_should_return_odd.groovy
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\mappings\add_two_numbers.json
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\mappings\validate_should_return_even.json
+META-INF\com.aiche\evenoddservice\0.0.1-SNAPSHOT\mappings\validate_should_return_odd.json

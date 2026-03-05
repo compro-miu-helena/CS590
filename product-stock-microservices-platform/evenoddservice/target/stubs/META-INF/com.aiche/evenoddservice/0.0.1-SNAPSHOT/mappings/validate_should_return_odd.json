@@ -1,0 +1,21 @@
+{
+  "id" : "079eb7ab-92a9-4f3e-b080-c66555e7ba36",
+  "request" : {
+    "urlPath" : "/validate",
+    "method" : "GET",
+    "queryParameters" : {
+      "number1" : {
+        "equalTo" : "1"
+      },
+      "number2" : {
+        "equalTo" : "1"
+      }
+    }
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "Odd",
+    "transformers" : [ "response-template", "spring-cloud-contract" ]
+  },
+  "uuid" : "079eb7ab-92a9-4f3e-b080-c66555e7ba36"
+}

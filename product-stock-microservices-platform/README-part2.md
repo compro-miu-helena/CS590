@@ -1,51 +1,62 @@
-# Product Stock Microservices Platform (Part 2)
+# Product Stock Microservices Platform (Lab 8 Part 2)
 
 ## Goal
-Register `stock-service` and `product-service` in Consul, route requests through the gateway, and let `product-service` call `stock-service` through discovery.
+Add a circuit breaker around the remote call from `product-service` to `stock-service` so `product-service` can return a fallback value when the stock endpoint is unavailable.
 
-## Dependencies added to both services
-- `spring-boot-starter-web`
-- `spring-cloud-starter-consul-discovery`
-- `spring-boot-starter-actuator`
+## Changes made
 
-`product-service` also keeps:
-- `spring-cloud-starter-openfeign`
+`product-service` now includes:
 
-## Consul
-Run Consul:
+- `org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j`
 
-```bash
-docker run -d -p 8500:8500 --name=consul hashicorp/consul:latest
-```
+The Feign call is no longer made directly from the controller. It now flows through:
 
-Open dashboard:
-- http://localhost:8500/
+- `ProductController`
+- `ProductCatalogService`
+- `StockLookupService`
 
-## Run order
-1. Start `stock-service`
-2. Confirm `stock-service` appears in Consul
-3. Start `product-service`
-4. Confirm `product-service` appears in Consul
-5. Call:
-   - `http://localhost:8901/product/1`
-
-Expected behavior:
-- Request reaches `product-service`
-- Feign resolves `stock-service` through Consul by service name
-- Response includes stock from `stock-service`
-
-## Key configuration
-Both services (`application.properties`):
-
-```properties
-spring.application.name=<service-name>
-spring.cloud.consul.host=localhost
-spring.cloud.consul.port=8500
-spring.cloud.consul.discovery.prefer-ip-address=true
-```
-
-Feign client in `product-service`:
+`StockLookupService` wraps the remote call through Spring Cloud CircuitBreaker:
 
 ```java
-@FeignClient(name = "stock-service")
+circuitBreakerFactory.create("stockService")
+        .run(() -> stockClient.getStock(productNumber), throwable -> -1);
 ```
+
+If `stock-service` is unavailable, the fallback returns `-1` for `numberOnStock`.
+
+## Circuit breaker configuration
+
+The breaker is configured in `product-service/src/main/resources/application.properties` to open quickly for demo/testing:
+
+```properties
+resilience4j.circuitbreaker.instances.stockService.sliding-window-size=2
+resilience4j.circuitbreaker.instances.stockService.minimum-number-of-calls=2
+resilience4j.circuitbreaker.instances.stockService.failure-rate-threshold=50
+resilience4j.circuitbreaker.instances.stockService.wait-duration-in-open-state=30s
+```
+
+## Test added
+
+Automated verification was added in:
+
+- `product-service/src/test/java/lab/productservice/service/ProductCatalogServiceCircuitBreakerTest.java`
+
+The test forces the Feign client to fail, verifies that:
+
+- the fallback response returns `numberOnStock = -1`
+- after two failures the breaker opens
+- the third call is short-circuited and does not call the Feign client again
+
+## Manual verification
+
+1. Start `product-service`
+2. Leave `stock-service` stopped, or stop it after startup
+3. Call `http://localhost:8901/product/1`
+
+Expected fallback response:
+
+```json
+{"productNumber":1,"name":"Laptop","numberOnStock":-1}
+```
+
+After repeated failed requests, the circuit opens and `product-service` stops attempting the remote stock call until the open-state wait period expires.
