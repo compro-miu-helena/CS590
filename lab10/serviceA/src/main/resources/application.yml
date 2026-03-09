@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: serviceA
+
+keycloak:
+  auth-server-url: http://localhost:8090/
+  realm: myrealm
+  resource: myclient
+  public-client: true
+  bearer-only: true
