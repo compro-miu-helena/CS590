@@ -1,0 +1,35 @@
+flowchart LR
+    subgraph ExternalClients["External Clients"]
+        WebPortal["Web Portal"]
+        ExpertApp["Expert Mobile App"]
+    end
+
+    Gateway["API Gateway<br/>Routing & Security"]
+
+    subgraph CoreServices["Core Services"]
+        ExpertMgmt["Expert Management Service<br/>Expert availability & skills"]
+        CustomerSvc["Customer Service<br/>Registration & profile"]
+        Ticketing["Ticketing & Matching Service<br/>Matching logic"]
+        Billing["Billing Service<br/>Annual credit card charging"]
+        Knowledge["Knowledge Base Service<br/>Search & updates"]
+        Survey["Survey Service<br/>Customer feedback"]
+    end
+
+    subgraph Broker["Message Broker (Kafka)"]
+        NotificationTopic["Notification Topic"]
+        TicketEvents["Ticket Events Topic"]
+    end
+
+    NotificationSvc["Notification Service<br/>SMS/Email"]
+
+    WebPortal --> Gateway
+    ExpertApp --> Gateway
+    Gateway --> ExpertMgmt
+    Gateway --> CustomerSvc
+    Gateway --> Ticketing
+    Gateway --> Billing
+    Gateway --> Knowledge
+    Gateway --> Survey
+    Ticketing -->|Publishes events| TicketEvents
+    TicketEvents -->|Triggers SMS/Email| NotificationSvc
+    Billing -->|Checks payment info| CustomerSvc
